@@ -186,7 +186,7 @@ class CardController extends \console\components\controllers\BaseController
 
         $headers = [
             "Content-Type:application/json",
-            "Authorization:Noumena:{$this->apiKey}:{$microTime}:{$signature}",
+            "Authorization:Inst:{$this->apiKey}:{$microTime}:{$signature}",
             "Access-Passphrase:{$this->passphrase}"
         ];
 
