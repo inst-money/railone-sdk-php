@@ -75,6 +75,7 @@ class CardController extends \console\components\controllers\BaseController
      */
     public function setPostParams($params)
     {
+        $this->formatArray($params)
         if (is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->postParams[$key] = $value;
@@ -191,5 +192,18 @@ class CardController extends \console\components\controllers\BaseController
         ];
 
         $this->curl->setOption(CURLOPT_HTTPHEADER, $headers);
+    }
+    
+    public function formatArray($array) {
+        if (is_array($array)) {
+            ksort($array);
+            foreach ($array as $key => $value) {
+                if (is_array($value)) {
+//                    echo $key . "<br>";
+                    $array[$key] = $this->formatArray($value);
+                }
+            }
+        }
+        return $array;
     }
 }
