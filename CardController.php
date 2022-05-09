@@ -56,6 +56,7 @@ class CardController extends \console\components\controllers\BaseController
      */
     public function setGetParams($params)
     {
+        $this->formatArray($params)
         if (is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->getParams[$key] = $value;
