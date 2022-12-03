@@ -52,7 +52,7 @@ class InstPaymentsSDK {
         if (!empty($body)){
             foreach ($body as $key => $value) {
                 if (is_array($value)) {
-                    $postStr .= $key.'=' .json_encode($value).'&';
+                    $postStr .= $key.'=' .json_encode($value, JSON_UNESCAPED_SLASHES).'&';
                 } else {
                     $postStr .= $key.'=' .$value.'&';
                 }
