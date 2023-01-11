@@ -38,7 +38,7 @@ class InstPaymentsSDK {
 
     private function sign($timestamp, $method, $requestPath, $queryString, $body) {
         $preHash = $this->preHash($timestamp, $method, $requestPath, $queryString, $this->apiKey, $body);
-        $sign = hash_hmac('sha256', utf8_encode($preHash) , utf8_encode($this->apiSecret), true);
+        $sign = hash_hmac('sha256', $preHash , $this->apiSecret, true);
         return base64_encode($sign);
     }
 
@@ -52,7 +52,7 @@ class InstPaymentsSDK {
         if (!empty($body)){
             foreach ($body as $key => $value) {
                 if (is_array($value)) {
-                    $postStr .= $key.'=' .json_encode($value, JSON_UNESCAPED_SLASHES + JSON_UNESCAPED_UNICODE).'&';
+                    $postStr .= $key.'=' .json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).'&';
                 } else {
                     $postStr .= $key.'=' .$value.'&';
                 }
